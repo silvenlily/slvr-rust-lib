@@ -1,0 +1,10 @@
+[package]
+name = "slvr-rust-lib"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+tauri_wasm = []
+
+[dependencies]
+

@@ -1,0 +1,11 @@
+[package]
+name = "slvr-rust-lib-build"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+tauri_wasm = []
+
+[dependencies]
+syn = { version = "2.0.106", features = ["full"] }
+walkdir = "2.5.0"

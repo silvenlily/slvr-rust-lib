@@ -1,0 +1,2 @@
+[workspace]
+members = [ "slvr-rust-lib", "slvr-rust-lib-build", "slvr-rust-lib-common", "slvr-rust-lib-macro"]
