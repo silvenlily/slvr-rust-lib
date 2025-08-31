@@ -1,0 +1,17 @@
+[package]
+name = "slvr_rust_lib_macro"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+tauri_wasm = []
+encapsulation = ["to_snake_case"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2.0.106", features = ["full"] }
+proc-macro2 = "1.0.101"
+quote = "1.0.40"
+to_snake_case = { version = "0.1.1", optional = true }

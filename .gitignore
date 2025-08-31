@@ -1,4 +1,4 @@
 /target
 **/*.rs.bk
 Cargo.lock
-/slvr_rust_Lib_dev/
+/slvr_rust_lib_dev/

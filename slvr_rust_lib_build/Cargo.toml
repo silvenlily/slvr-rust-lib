@@ -1,5 +1,5 @@
 [package]
-name = "slvr-rust-lib-build"
+name = "slvr_rust_lib_build"
 version = "0.1.0"
 edition = "2024"
 

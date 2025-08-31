@@ -9,10 +9,10 @@ If you find a bug open a github issue and I might fix it.
 
 ## features
 
-| feat        | description                                                                                                                                                                                                                                                                                                                                           |
-|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| tauri_wasm  | a set of tools for dealing with the connection between your frontend and backend code in tauri where your frontend is written in rust (ie: leptos)                                                                                                                                                                                                    |
-| encapsulate | A macro and trait that makes encapsulating structs easy and allows the retrieval of data from those structs in a generic way. Particularly useful for enabling caching without having to manually implement some kind of cache trait for every single struct. It is possible to implement inheritance using this, if you do this I will be very sad.  |
+| feature(s)                                          | description                                                                                                                                                                                                                                                                                                                                           |
+|-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| tauri_wasm  tauri_wasm_backend  tauri_wasm_frontend | a set of tools for dealing with the connection between your frontend and backend code in tauri where your frontend is written in rust (ie: leptos)                                                                                                                                                                                                    |
+| encapsulate                                         | A macro and trait that makes encapsulating structs easy and allows the retrieval of data from those structs in a generic way. Particularly useful for enabling caching without having to manually implement some kind of cache trait for every single struct. It is possible to implement inheritance using this, if you do this I will be very sad.  |
 
 ## Crates
 If you are a consumer of this library, you want `slvr_rust_lib` or `slvr_rust_lib_build` as a build-dependency.  
@@ -27,10 +27,10 @@ When are you going to publish this crate to crates.io?
 Probably never, feel free to fork this repo and do that yourself.
 
 Why did you put everything in one big crate instead of breaking it up into smaller crates?  
-It's more convenient for me, feel free to for this repo and do that yourself.
+It's more convenient for me, feel free to fork this repo and do that yourself.
 
 Dear god \<feature> is hacky, please fix \<feature>  
-Yes, most things in this repo are hacks to get around problems in unintended ways, feel free to for this repo and do that yourself though.
+Yes, most things in this repo are hacks to get around problems in unintended ways, feel free to fork this repo and do that yourself though.
 
 What is with the `.aiignore` `.noai` `.aiexclude` `.codeiumignore` `.cursorignore` files?  
 See: https://www.jetbrains.com/help/ai-assistant/disable-ai-assistant.html
