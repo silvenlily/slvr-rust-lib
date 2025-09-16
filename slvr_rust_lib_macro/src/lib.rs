@@ -26,6 +26,8 @@ pub fn tauri_response(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 #[cfg(feature = "encapsulation")]
 mod encapsulation;
+#[cfg(feature = "encapsulation")]
+mod to_snake_case;
 
 #[cfg(feature = "encapsulation")]
 #[proc_macro_attribute]
