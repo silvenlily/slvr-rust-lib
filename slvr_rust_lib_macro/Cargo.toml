@@ -7,7 +7,7 @@ edition = "2024"
 tauri_wasm_frontend = ["tauri_wasm"]
 tauri_wasm_backend = ["tauri_wasm"]
 tauri_wasm = []
-encapsulation = ["to_snake_case"]
+encapsulation = []
 
 [lib]
 proc-macro = true
@@ -16,4 +16,5 @@ proc-macro = true
 syn = { version = "2.0.106", features = ["full"] }
 proc-macro2 = "1.0.101"
 quote = "1.0.40"
-to_snake_case = { version = "0.1.1", optional = true }
+# to snake case does not build on current editions of rust because of feature flag weirdness, temporarally copied the code into a file and patched it
+#to_snake_case = { version = "0.1.1", optional = true }

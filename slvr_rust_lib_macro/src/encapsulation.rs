@@ -3,7 +3,7 @@ use proc_macro2::{Ident, Span};
 use quote::quote;
 use syn::parse::Parser;
 use syn::{DeriveInput, parse_macro_input};
-use to_snake_case::ToSnakeCase;
+use crate::to_snake_case::ToSnakeCase;
 
 pub fn encapsulate(args: TokenStream, input: TokenStream) -> TokenStream {
     let mut ast = parse_macro_input!(input as DeriveInput);
