@@ -72,3 +72,21 @@ impl<Ok, Err> FromResidual<OptionalResult<Infallible, Err>> for OptionalResult<O
         }
     }
 }
+
+impl<Ok, Err> FromResidual<Result<Infallible, Err>> for OptionalResult<Ok, Err> {
+    fn from_residual(residual: Result<Infallible, Err>) -> Self {
+        match residual {
+            Ok(x) => match x {},
+            Err(err) => OptionalResult::Err(err),
+        }
+    }
+}
+
+impl<Ok, Err> FromResidual<Option<Infallible>> for OptionalResult<Ok, Err> {
+    fn from_residual(residual: Option<Infallible>) -> Self {
+        match residual {
+            Some(x) => match x {},
+            None => OptionalResult::None
+        }
+    }
+}
