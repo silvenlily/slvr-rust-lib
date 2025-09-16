@@ -1,4 +1,4 @@
 [workspace]
 resolver = "3"
-members = [ "slvr_rust_lib", "slvr_rust_lib_build", "slvr_rust_lib_common", "slvr_rust_lib_macro"]
+members = [ "slvr_rust_lib", "slvr_rust_lib_build", "slvr_rust_lib_common", "slvr_rust_lib_errors", "slvr_rust_lib_macro", "slvr_rust_lib_errors"]
 exclude = ["slvr_rust_lib_dev"]

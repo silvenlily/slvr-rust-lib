@@ -4,9 +4,9 @@ version = "0.1.0"
 edition = "2024"
 
 [features]
-tauri_wasm = ["slvr_rust_lib_common/tauri_wasm", "slvr_rust_lib_build/tauri_wasm", "slvr_rust_lib_macro/tauri_wasm", "serde/derive"]
-tauri_wasm_frontend = ["tauri_wasm","slvr_rust_lib_common/tauri_wasm_frontend"]
-tauri_wasm_backend = ["tauri_wasm","slvr_rust_lib_common/tauri_wasm_backend"]
+tauri_wasm = ["slvr_rust_lib_common/tauri_wasm", "slvr_rust_lib_build/tauri_wasm", "serde/derive"]
+tauri_wasm_frontend = ["tauri_wasm","slvr_rust_lib_common/tauri_wasm_frontend", "slvr_rust_lib_macro/tauri_wasm_frontend"]
+tauri_wasm_backend = ["tauri_wasm","slvr_rust_lib_common/tauri_wasm_backend", "slvr_rust_lib_macro/tauri_wasm_backend"]
 encapsulation = ["slvr_rust_lib_common/encapsulation", "slvr_rust_lib_macro/encapsulation"]
 
 [dependencies]

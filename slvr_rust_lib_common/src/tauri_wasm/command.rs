@@ -16,12 +16,14 @@ pub trait TauriCommand<Result: TauriResult>: MsgSafe {
     const COMMAND_NAME: &'static str;
 
     #[cfg(feature = "tauri_wasm_frontend")]
-    async fn send(self) -> Result {
-        Result::from_js(invoke_args(Self::COMMAND_NAME, self.to_js()).await)
+    fn send(self) -> impl Future<Output = Result> {
+        async move {
+            Result::from_js(invoke_args(Self::COMMAND_NAME, self.to_js()).await)
+        }
     }
 
     #[cfg(feature = "tauri_wasm_backend")]
-    async fn handle(self) -> Result;
+    fn handle(self) -> impl Future<Output = Result>;
 }
 
 pub trait TauriResult: MsgSafe {}

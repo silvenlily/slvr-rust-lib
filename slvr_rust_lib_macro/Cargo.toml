@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [features]
+tauri_wasm_frontend = ["tauri_wasm"]
+tauri_wasm_backend = ["tauri_wasm"]
 tauri_wasm = []
 encapsulation = ["to_snake_case"]
 

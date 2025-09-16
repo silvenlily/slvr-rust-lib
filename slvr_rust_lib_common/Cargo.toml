@@ -8,6 +8,7 @@ tauri_wasm = ["serde/derive", "serde-wasm-bindgen","wasm-bindgen", "wasm-bindgen
 tauri_wasm_frontend = ["tauri_wasm"]
 tauri_wasm_backend = ["tauri_wasm"]
 encapsulation = []
+error = []
 
 
 [dependencies]

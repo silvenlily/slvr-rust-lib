@@ -1,7 +1,13 @@
-use proc_macro::{TokenStream};
+use proc_macro::TokenStream;
 use proc_macro2::{Ident, Span};
-use quote::{quote, ToTokens};
-use syn::{Expr, ImplItem, ItemImpl, ItemStruct, parse_macro_input, parse_quote, parse2, ExprLit, Lit, LitStr, Type};
+use quote::{ToTokens, quote};
+use syn::{Expr, ImplItem, ItemImpl, ItemStruct, Lit, Type, parse_macro_input, parse_quote};
+
+#[cfg(all(feature = "tauri_wasm_backend", feature = "tauri_wasm_frontend"))]
+compile_error!("You may only use frontend or backend, not both");
+
+#[cfg(not(any(feature = "tauri_wasm_backend", feature = "tauri_wasm_frontend")))]
+compile_error!("You must use frontend or backend");
 
 pub(crate) fn command_attribute(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let mut input = parse_macro_input!(item as ItemStruct);
@@ -18,7 +24,7 @@ pub(crate) fn command_attribute(_attr: TokenStream, item: TokenStream) -> TokenS
 }
 
 pub(crate) fn command_impl_attribute(_attr: TokenStream, item: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(item as ItemImpl);
+    let mut input = parse_macro_input!(item as ItemImpl);
 
     let struct_name: Ident = match &*input.self_ty {
         Type::Path(path) => {
@@ -27,8 +33,8 @@ pub(crate) fn command_impl_attribute(_attr: TokenStream, item: TokenStream) -> T
             } else {
                 panic!("called impl macro on type with no identifier?");
             }
-        },
-        _ => panic!("called impl macro on non impl type?")
+        }
+        _ => panic!("called impl macro on non impl type?"),
     };
 
     let command_name: Ident = {
@@ -45,7 +51,7 @@ pub(crate) fn command_impl_attribute(_attr: TokenStream, item: TokenStream) -> T
                     break;
                 }
             }
-        };
+        }
         if let Some(name) = try_name {
             name
         } else {
@@ -53,14 +59,29 @@ pub(crate) fn command_impl_attribute(_attr: TokenStream, item: TokenStream) -> T
         }
     };
 
-    quote! {
+    #[cfg(feature = "tauri_wasm_frontend")]
+    input.items.retain(|item| {
+        if let ImplItem::Fn(func) = item {
+            func.sig.ident != "handle"
+        } else {
+            true
+        }
+    });
+
+    #[cfg(feature = "tauri_wasm_backend")]
+    return quote! {
         #input
         #[tauri::command]
         async fn #command_name(args: #struct_name) -> CheckScreenshotResp {
             args.handle().await
         }
     }
-    .into()
+    .into();
+
+    #[cfg(feature = "tauri_wasm_frontend")]
+    return quote! {
+        #input
+    }.into();
 }
 
 pub(crate) fn response_attribute(_attr: TokenStream, item: TokenStream) -> TokenStream {

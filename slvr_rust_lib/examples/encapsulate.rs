@@ -9,8 +9,6 @@ compile_error!("This example requires the encapsulation feature.");
 
 fn main() {
 
-
-
     let mut user_cache: Cache<User> = Cache::new();
     let mut song_cache: Cache<Song> = Cache::new();
 
