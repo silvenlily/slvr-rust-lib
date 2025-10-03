@@ -1,0 +1,10 @@
+[package]
+name = "slvr_rust_lib_disjoint_groups"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[dev-dependencies]
+proptest = "1.8.0"
+

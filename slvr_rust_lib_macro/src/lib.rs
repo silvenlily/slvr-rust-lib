@@ -31,6 +31,10 @@ mod to_snake_case;
 
 #[cfg(feature = "encapsulation")]
 #[proc_macro_attribute]
+/**
+* Encapsulates the provided field on the struct it is called on.
+* You can then access that field through the encapsulation trait.
+*/
 pub fn encapsulate(attr: TokenStream,  item: TokenStream) -> TokenStream {
     encapsulation::encapsulate(attr, item)
 }

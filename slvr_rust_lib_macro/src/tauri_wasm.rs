@@ -59,29 +59,14 @@ pub(crate) fn command_impl_attribute(_attr: TokenStream, item: TokenStream) -> T
         }
     };
 
-    #[cfg(feature = "tauri_wasm_frontend")]
-    input.items.retain(|item| {
-        if let ImplItem::Fn(func) = item {
-            func.sig.ident != "handle"
-        } else {
-            true
-        }
-    });
-
-    #[cfg(feature = "tauri_wasm_backend")]
-    return quote! {
+    quote! {
         #input
         #[tauri::command]
         async fn #command_name(args: #struct_name) -> CheckScreenshotResp {
             args.handle().await
         }
     }
-    .into();
-
-    #[cfg(feature = "tauri_wasm_frontend")]
-    return quote! {
-        #input
-    }.into();
+    .into()
 }
 
 pub(crate) fn response_attribute(_attr: TokenStream, item: TokenStream) -> TokenStream {

@@ -8,9 +8,10 @@
       <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_macro/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_dev/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_errors/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_disjoint_groups/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/slvr_rust_lib_dev/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
-      <excludeFolder url="file://$MODULE_DIR$/slvr_rust_lib/examples" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
