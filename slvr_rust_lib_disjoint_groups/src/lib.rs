@@ -31,6 +31,43 @@ impl Display for GetManyDisjointGroupedError {
 
 impl Error for GetManyDisjointGroupedError {}
 
+pub fn check_valid_disjoint_groups(
+    data_bounds: &Range<usize>,
+    groups: &Groups,
+) -> Result<(), GetManyDisjointGroupedError> {
+    let mut values: Vec<&Range<usize>> = groups
+        .iter()
+        .flatten()
+        .filter(|r| r.start < r.end)
+        .collect();
+
+    values.sort_by_key(|a| a.start);
+
+    // getting no values is stupid but safe
+    if values.is_empty() {
+        return Ok(());
+    }
+
+    // check for overlap
+    for pair in values.windows(2) {
+        if pair[0].end > pair[1].start {
+            return Err(GetManyDisjointGroupedError::NotDisjoint);
+        }
+    }
+
+    // get the bounds of the groups
+    let start = values.first().unwrap().start;
+    let end = values.last().unwrap().end;
+
+    let groups_bounds = Range { start, end };
+
+    if groups_bounds.start >= data_bounds.start && groups_bounds.end <= data_bounds.end {
+        Ok(())
+    } else {
+        Err(GetManyDisjointGroupedError::OutOfBounds)
+    }
+}
+
 /// Allows borrowing groups of ranges at the same time from an underlying data structure
 ///
 /// # UNSTABLE
@@ -59,38 +96,7 @@ pub trait GetManyDisjointGrouped<Item> {
         &self,
         groups: &Groups,
     ) -> Result<(), GetManyDisjointGroupedError> {
-        let mut values: Vec<&Range<usize>> = groups
-            .iter()
-            .flatten()
-            .filter(|r| r.start < r.end)
-            .collect();
-
-        values.sort_by_key(|a| a.start);
-
-        // getting no values is stupid but safe
-        if values.is_empty() {
-            return Ok(());
-        }
-
-        // check for overlap
-        for pair in values.windows(2) {
-            if pair[0].end > pair[1].start {
-                return Err(GetManyDisjointGroupedError::NotDisjoint);
-            }
-        }
-
-        // get the bounds of the groups
-        let start = values.first().unwrap().start;
-        let end = values.last().unwrap().end;
-
-        let groups_bounds = Range { start, end };
-        let data_bounds = self.bounds();
-
-        if groups_bounds.start >= data_bounds.start && groups_bounds.end <= data_bounds.end {
-            Ok(())
-        } else {
-            Err(GetManyDisjointGroupedError::OutOfBounds)
-        }
+        check_valid_disjoint_groups(&self.bounds(),groups)
     }
 
     /// Gets groups of references to items in the underlying data structure
