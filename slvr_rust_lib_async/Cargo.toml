@@ -1,0 +1,7 @@
+[package]
+name = "slvr_rust_lib_async"
+description = "Utilities for async code"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
