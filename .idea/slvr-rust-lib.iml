@@ -12,6 +12,9 @@
       <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_disjoint_groups/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_encapsulation_macro/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_async/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/slvr_rust_macro_encapsulate/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_sync/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/slvr_rust_lib_tracing/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/slvr_rust_lib_dev/target" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>

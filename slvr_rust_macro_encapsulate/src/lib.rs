@@ -1,11 +1,23 @@
+pub(crate) extern crate proc_macro;
+
 use proc_macro::TokenStream;
 use proc_macro2::{Ident, Span};
 use quote::quote;
 use syn::parse::Parser;
 use syn::{DeriveInput, parse_macro_input};
-use crate::to_snake_case::ToSnakeCase;
 
-pub fn encapsulate(args: TokenStream, input: TokenStream) -> TokenStream {
+use slvr_rust_lib_common::to_snake_case::ToSnakeCase;
+
+#[proc_macro_attribute]
+/**
+* Encapsulates the provided field on the struct it is called on.
+* You can then access that field through the encapsulation trait.
+*/
+pub fn encapsulate(attr: TokenStream,  item: TokenStream) -> TokenStream {
+    encapsulate_inner(attr, item)
+}
+
+fn encapsulate_inner(args: TokenStream, input: TokenStream) -> TokenStream {
     let mut ast = parse_macro_input!(input as DeriveInput);
 
     let struct_name = ast.ident.clone();
@@ -43,7 +55,7 @@ pub fn encapsulate(args: TokenStream, input: TokenStream) -> TokenStream {
                     }
                 }
             }
-            .into()
+                .into()
         }
         _ => panic!("encapsulate macro only works on structs"),
     }

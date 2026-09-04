@@ -1,0 +1,19 @@
+[package]
+name = "slvr_rust_lib"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+default = ["slvr_rust_lib_common", "slvr_rust_lib_sync", "slvr_rust_lib_tracing"]
+
+slvr_rust_lib_common = ["dep:slvr_rust_lib_common"]
+slvr_rust_lib_sync = ["dep:slvr_rust_lib_sync"]
+slvr_rust_lib_tracing = ["dep:slvr_rust_lib_tracing"]
+
+slvr_rust_macro_encapsulate = ["dep:slvr_rust_macro_encapsulate", "slvr_rust_lib_common"]
+
+[dependencies]
+slvr_rust_lib_common = { workspace = true, optional = true }
+slvr_rust_lib_sync = { workspace = true, optional = true }
+slvr_rust_lib_tracing = { workspace = true, optional = true }
+slvr_rust_macro_encapsulate = { workspace = true, optional = true }

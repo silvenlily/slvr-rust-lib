@@ -43,14 +43,12 @@ impl <T> ToSnakeCase for T where T: AsRef<str> {
             let mut n1: (bool, char) = (first.is_lowercase(), first);
 
             for c in text {
-                let prev_n1 = n1.clone();
+                let prev_n1 = n1;
 
                 let n3 = n2;
                 n2 = Some(n1);
                 n1 = (c.is_lowercase(), c);
 
-                // insert underscore if acronym at beginning
-                // ABc -> a_bc
                 if let Some((false, c3)) = n3
                     && let Some((false, c2)) = n2
                     && n1.0
@@ -61,8 +59,6 @@ impl <T> ToSnakeCase for T where T: AsRef<str> {
 
                 buffer.push_str(&prev_n1.1.to_lowercase().to_string());
 
-                // insert underscore before next word
-                // abC -> ab_c
                 if let Some((true, _)) = n2 && n1.1.is_uppercase() {
                     buffer.push('_');
                 }

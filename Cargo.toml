@@ -1,4 +1,26 @@
 [workspace]
 resolver = "3"
-members = ["slvr_rust_lib_build", "slvr_rust_lib_common", "slvr_rust_lib_errors", "slvr_rust_lib_macro", "slvr_rust_lib_errors", "slvr_rust_lib_disjoint_groups"]
-exclude = ["slvr_rust_lib_dev"]
+members = ["slvr_rust_lib",
+    "slvr_rust_lib_common",
+    "slvr_rust_lib_sync",
+    "slvr_rust_lib_tracing",
+    "slvr_rust_macro_encapsulate",
+]
+
+[workspace.dependencies]
+# workspace
+slvr_rust_lib_common = { path = "./slvr_rust_lib_common" }
+slvr_rust_lib_sync = { path = "./slvr_rust_lib_sync" }
+slvr_rust_lib_tracing = { path = "./slvr_rust_lib_tracing" }
+slvr_rust_macro_encapsulate = { path = "./slvr_rust_macro_encapsulate" }
+
+# dependencies
+proc-macro2 = { version = "1.0.107" }
+quote = { version = "1.0.47" }
+syn = { version = "3.0.4" }
+
+thread_local = "1.1.10"
+
+tracing = { version = "0.1.44" }
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+tracing-log = { version = "0.2.0" }
