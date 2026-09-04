@@ -1,7 +1,10 @@
 #![allow(unused_imports)]
 
+pub mod macros;
+
 pub mod prelude {
     pub use crate::lcommon;
+    pub use crate::macros::macro_prelude::*;
 
     #[cfg(feature = "slvr_rust_lib_common")]
     pub use slvr_rust_lib_common::prelude::*;
@@ -14,6 +17,8 @@ pub mod prelude {
 }
 
 pub mod lcommon {
+    pub use crate::macros::macro_lcommon::*;
+
     #[cfg(feature = "slvr_rust_lib_common")]
     pub use slvr_rust_lib_common::lcommon::*;
 
@@ -25,6 +30,8 @@ pub mod lcommon {
 }
 
 pub mod lib {
+    pub use crate::macros::macro_lib::*;
+
     #[cfg(feature = "slvr_rust_lib_common")]
     pub use slvr_rust_lib_common;
 
