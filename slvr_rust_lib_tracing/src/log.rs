@@ -1,7 +1,8 @@
 use std::collections::HashMap;
-use tracing::Level;
 use tracing_log::LogTracer;
 use tracing_subscriber::FmtSubscriber;
+
+pub use tracing::Level;
 
 #[derive(Clone)]
 pub struct LoggingConfig {
