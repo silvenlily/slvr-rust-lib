@@ -10,6 +10,11 @@ pub mod lcommon {
 
 pub mod prelude {
     pub use crate::tracing_struct_ext::TracingStructExt;
+    pub use tracing::trace;
+    pub use tracing::debug;
+    pub use tracing::info;
+    pub use tracing::warn;
+    pub use tracing::error;
 }
 
 pub mod lib {
