@@ -37,6 +37,15 @@ impl LoggingConfig {
         self
     }
 
+    #[allow(unused_variables)]
+    #[inline]
+    pub fn crate_level_dev(self, level: Level, dev_level: Level) -> Self {
+        #[cfg(debug_assertions)]
+        return self.crate_level(dev_level);
+        #[cfg(not(debug_assertions))]
+        return self.crate_level(level);
+    }
+
     pub fn filter(mut self, filter: String, level: Level) -> Self {
         self.filters.insert(filter, level);
         self
