@@ -8,7 +8,6 @@ pub use tracing::Level;
 pub struct LoggingConfig {
     pub default_level: Level,
     pub filters: HashMap<String, Level>,
-    pub crate_level: Level,
 }
 
 impl LoggingConfig {
@@ -16,7 +15,6 @@ impl LoggingConfig {
         Self {
             default_level,
             filters: HashMap::new(),
-            crate_level: default_level,
         }
     }
 
@@ -29,21 +27,6 @@ impl LoggingConfig {
         let lvl = default_level;
 
         Self::new(lvl)
-    }
-
-    #[inline]
-    pub fn crate_level(mut self, level: Level) -> Self {
-        self.crate_level = level;
-        self
-    }
-
-    #[allow(unused_variables)]
-    #[inline]
-    pub fn crate_level_dev(self, level: Level, dev_level: Level) -> Self {
-        #[cfg(debug_assertions)]
-        return self.crate_level(dev_level);
-        #[cfg(not(debug_assertions))]
-        return self.crate_level(level);
     }
 
     pub fn filter(mut self, filter: String, level: Level) -> Self {
@@ -63,7 +46,9 @@ impl LoggingConfig {
     #[inline]
     pub fn dev_only_filter(self, filter: String, dev_level: Level) -> Self {
         #[cfg(debug_assertions)]
-        self.filter(filter, dev_level)
+        return self.filter(filter, dev_level);
+        #[cfg(not(debug_assertions))]
+        self
     }
 
     pub fn init_logging(self) {
@@ -73,8 +58,6 @@ impl LoggingConfig {
         for (f, l) in self.filters {
             filter.push(Self::lvl_string(f, l));
         }
-
-        filter.push(Self::lvl_string(env!("CARGO_CRATE_NAME").to_string(),self.crate_level));
 
         let env_filter = filter.join(",");
 
